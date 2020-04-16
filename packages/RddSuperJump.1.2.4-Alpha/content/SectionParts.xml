@@ -1,0 +1,72 @@
+﻿<ModifyFiles>
+  <_Layout.cshtml>
+    <![CDATA[ 
+<body>
+    <button type="button" onclick="callAjaxSuc()">CLICK to send ajax success request</button>
+    <button type="button" onclick="callAjaxFail()">CLICK to send ajax fail request</button>
+    <script>
+        function callAjaxSuc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("plot").innerHTML = "<div style='background:#0094ff;'>:)Have a good day<div>";
+                }
+            };
+            xhttp.open("POST", "/home/index", true);
+            xhttp.send();
+        }
+        function callAjaxFail() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+                }
+                else
+                    document.getElementById("plot").innerHTML = "<div style='background:#ff0000;'>Sorry:(Can't reach this page.<div>";
+            };
+            xhttp.open("POST", "UndefinedView?t=" + Math.random(), true);
+            xhttp.send();
+        }
+    </script>
+    <div id="plot">HERE</div>
+    <div style="margin-left: auto;margin-right: auto;padding-top: 10px;padding-left: 80px;width: 800px;height: 80px;background: #0094ff;">
+        <input id="httpdata" type="button" value="HttpData" onclick="location.href='@Url.Action("ForHttpData","Home")'" />
+        <input id="download" type="button" value="DownLoadFromBlob" onclick="location.href='@Url.Action("DownloadFromBlob","Home")'" />
+        <input id="SQLData" type="button" value="SQLData" onclick="location.href='@Url.Action("ConnectDB","Home")'" />
+        <input id="httperror" type="button" value="HttpError" onclick="location.href='@Url.Action("ForHttpError","Home")'" />
+        <input id="BlobError" type="button" value="bloberror" onclick="location.href='@Url.Action("BlobError","Home")'" />
+        <input id="SqlError" type="button" value="SQLError" onclick="location.href='@Url.Action("SqlError","Home")'" />
+        <input id="GetAzureQueueAndTableInfo" type="button" value="GetAzureQueueAndTableInfo" onclick="location.href='@Url.Action("GetAzureQueueAndTableInfo","Home")'" />
+        <input id="GetAzureQueueAndTableError" type="button" value="GetAzureQueueAndTableError" onclick="location.href='@Url.Action("GetAzureQueueAndTableError","Home")'" />
+    </div>
+<form name=loading>
+            <p align=center>
+                <font color="#0066ff" size="2">Waiting for loading</font><font color="#0066ff" size="2" face="Arial">...</font>
+                <input type=text name=chart size=46 style="font-family:Arial; font-weight:bolder; color:#0066ff; background-color:#fef4d9; padding:0px; border-style:none;">
+
+                <input type=text name=percent size=47 style="color:#0066ff; text-align:center; border-width:medium; border-style:none;">
+                <script>
+                    var bar = 0
+                    var line = "||"
+                    var amount = "||"
+                    count()
+                    function count() {
+                        bar = bar + 2
+                        amount = amount + line
+                        document.loading.chart.value = amount
+                        document.loading.percent.value = bar + "%"
+                        if (bar < 99)
+                        { setTimeout("count()", 100); }
+                        else
+                        { window.location = @RenderSection("MasterPart", false);}
+                    }</script>
+            </p>
+        </form><p align="center">
+            Jump<br />
+            Here<br />
+            and There<br /><br />
+            If it isn't jumped,<a style="text-decoration: none" href="/Home/Index"><font color="#FF0000">Click here</font></a>.
+		</p>]]>
+  </_Layout.cshtml>
+  </ModifyFiles>
+  
