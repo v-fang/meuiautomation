@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/packages/bootstrap.3.3.1/content
+/packages/bootstrap.3.3.1
+/.vs
